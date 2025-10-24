@@ -1,0 +1,371 @@
+/// Cy ////
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade Calculator</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      background: #f6f7fb;
+      color: #222;
+    }
+
+    .wrapper {
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 0 16px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: 2.25rem;
+      text-align: center;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      padding: 20px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    label {
+      min-width: 220px;
+    }
+
+    input[type="number"] {
+      width: 140px;
+      padding: 8px 10px;
+      border: 1px solid #d5d7df;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 9px 14px;
+      border: 0;
+      border-radius: 8px;
+      background: #2f6fed;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover { filter: brightness(1.05); }
+
+    .result {
+      margin-top: 14px;
+      min-height: 24px; /* keeps layout steady before result shows */
+      text-align: center;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <!-- Level 1 heading as required -->
+    <h1>Grade Calculator</h1>
+
+    <div class="card">
+      <div class="row">
+        <label id="marksLabel" for="marks">Enter your marks (0-100):</label>
+        <input
+          type="number"
+          id="marks"
+          min="0"
+          max="100"
+          placeholder="e.g., 86"
+          aria-labelledby="marksLabel"
+        />
+        <button id="getGradeButton">Convert</button>
+      </div>
+
+      <p id="gradeResult" class="result"></p>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("getGradeButton").addEventListener("click", function () {
+      const marksInput = document.getElementById("marks").value.trim();
+      let message = "";
+
+      if (marksInput === "") {
+        message = "Enter any marks to get the grades.";
+      } else {
+        const marks = parseInt(marksInput, 10);
+
+        if (isNaN(marks) || marks < 0 || marks > 100) {
+          message = "The marks should be between 0-100.";
+        } else if (marks >= 90) {
+          message = For marks ${marks}, your grade is A;
+        } else if (marks >= 80) {
+          message = For marks ${marks}, your grade is B;
+        } else if (marks >= 70) {
+          message = For marks ${marks}, your grade is C;
+        } else if (marks >= 60) {
+          message = For marks ${marks}, your grade is D;
+        } else {
+          message = For marks ${marks}, your grade is F;
+        }
+      }
+
+      document.getElementById("gradeResult").innerText = message;
+    });
+  </script>
+</body>
+</html>
+
+
+//// index.html ////
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kids Sketch Pad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    #sketchPad {
+      border: 2px solid #000;
+    }
+    #currentColorDisplay {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body class="p-4">
+  <div class="container text-center">
+    <h2>Kids Sketch Pad</h2>
+
+    <!-- Canvas -->
+    <canvas id="sketchPad" width="500" height="300"></canvas>
+
+    <!-- Color Control Buttons -->
+    <div class="my-3">
+      <button id="redBtn" class="btn btn-danger">Red</button>
+      <button id="blueBtn" class="btn btn-primary">Blue</button>
+      <button id="greenBtn" class="btn btn-success">Green</button>
+      <button id="eraserBtn" class="btn btn-secondary">Eraser</button>
+    </div>
+
+    <!-- Clear Button -->
+    <div class="mb-3">
+      <button id="clearBtn" class="btn btn-dark">Clear Canvas</button>
+    </div>
+
+    <!-- Current Color Display -->
+    <div id="currentColorDisplay">Current Color: <span id="currentColor">Black</span></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+////  pah2  ///
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h3 {
+            color: #333;
+        }
+        .form-container {
+            margin: 20px 0;
+        }
+        label {
+            display: inline-block;
+            width: 120px;
+            text-align: right;
+            margin-right: 10px;
+        }
+        input[type="number"] {
+            padding: 8px;
+            margin: 5px;
+            width: 150px;
+        }
+        #generateBtn {
+            background-color: rgb(77, 176, 80);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #errormessage {
+            color: red;
+            margin: 10px 0;
+            min-height: 20px;
+        }
+        #table {
+            margin: 20px auto;
+            text-align: left;
+            display: inline-block;
+            white-space: pre; /* Preserve newlines and whitespace */
+        }
+    </style>
+</head>
+<body>
+    <h3>Multiplication Table Generator</h3>
+    <div class="form-container">
+        <div>
+            <label for="number">Enter a number:</label>
+            <input type="number" id="number" placeholder="Enter a number">
+        </div>
+        <div>
+            <label for="start">Start Value:</label>
+            <input type="number" id="start" placeholder="Start of range">
+        </div>
+        <div>
+            <label for="end">End Value:</label>
+            <input type="number" id="end" placeholder="End of range">
+        </div>
+        <button type="button" id="generateBtn">Generate Table</button>
+    </div>
+    <div id="errormessage"></div>
+    <div id="table">3 x 1 = 3
+3 x 2 = 6
+3 x 3 = 9</div>
+
+    <script>
+        const numberInput = document.getElementById('number');
+        const startInput = document.getElementById('start');
+        const endInput = document.getElementById('end');
+        const generateBtn = document.getElementById('generateBtn');
+        const errorMessage = document.getElementById('errormessage');
+        const tableOutput = document.getElementById('table');
+
+        // Function to generate multiplication table
+        function generateTable(num, start, end) {
+            let tableContent = '';
+            for (let i = start; i <= end; i++) {
+                tableContent += ${num} x ${i} = ${num * i}\n;
+            }
+            return tableContent;
+        }
+
+        // Set sample output on page load
+        // Already set in HTML: tableOutput.textContent = generateTable(3, 1, 3);
+
+        generateBtn.addEventListener('click', () => {
+            // Clear previous error
+            errorMessage.textContent = '';
+
+            // Get input values
+            const number = numberInput.value.trim();
+            const start = startInput.value.trim();
+            const end = endInput.value.trim();
+
+            // Validate inputs
+            if (!number || !start || !end) {
+                errorMessage.textContent = 'All fields are required!';
+                tableOutput.textContent = generateTable(3, 1, 3); // Revert to sample output
+                return;
+            }
+
+            const num = parseInt(number);
+            const startVal = parseInt(start);
+            const endVal = parseInt(end);
+
+            // Generate multiplication table
+            tableOutput.textContent = generateTable(num, startVal, endVal);
+        });
+    </script>
+</body>
+</html>
+
+/// script.js ///
+
+
+
+// write you Scripts here
+// DOM Elements
+const canvas = document.getElementById('sketchPad');
+const ctx = canvas.getContext('2d');
+const redBtn = document.getElementById('redBtn');
+const blueBtn = document.getElementById('blueBtn');
+const greenBtn = document.getElementById('greenBtn');
+const eraserBtn = document.getElementById('eraserBtn');
+const clearBtn = document.getElementById('clearBtn');
+const currentColorDisplay = document.getElementById('currentColor');
+
+// Initial Values
+let isDrawing = false;
+let currentColor = 'black';
+ctx.strokeStyle = currentColor;
+ctx.lineWidth = 2;
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+
+// Helper to update color
+function setColor(colorName, hexCode) {
+  currentColor = hexCode;
+  ctx.strokeStyle = currentColor;
+  currentColorDisplay.textContent = colorName;
+}
+
+// Mouse Events
+canvas.addEventListener('mousedown', (e) => {
+  isDrawing = true;
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX, e.offsetY);
+});
+
+canvas.addEventListener('mousemove', (e) => {
+  if (isDrawing) {
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+  }
+});
+
+canvas.addEventListener('mouseup', () => {
+  isDrawing = false;
+  ctx.closePath();
+});
+
+canvas.addEventListener('mouseout', () => {
+  isDrawing = false;
+});
+
+// Color Change Events
+redBtn.addEventListener('click', () => setColor('Red', '#ff0000'));
+blueBtn.addEventListener('click', () => setColor('Blue', '#0000ff'));
+greenBtn.addEventListener('click', () => setColor('Green', '#00ff00'));
+
+// Eraser
+eraserBtn.addEventListener('click', () => setColor('White', '#ffffff'));
+
+// Clear Canvas
+clearBtn.addEventListener('click', () => {
+    ctx.fillStyle='#ffffff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  setColor('Black', '#000000');
+});
