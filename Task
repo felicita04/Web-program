@@ -1,0 +1,402 @@
+
+Welcome to Task Manager, a task management system that allows users to add and view tasks. This application helps users efficiently manage their tasks with a simple interface. Built with React for the frontend and Node.js with MongoDB for the backend, the application provides an easy-to-use interface for adding and viewing tasks.
+
+
+
+Users of the System:
+
+Admin/User - Single role with full access to add and view tasks.
+
+
+User Flow Diagram:
+
+
+
+Start → Home Page → Select Action (Add/View Tasks) → Perform Action → Success/Error Feedback → Return to Home
+
+
+
+Modules of the Application:
+
+
+
+Main Features:
+
+Home Dashboard
+Add Task
+View Tasks
+Navigation System
+
+Technology Stack
+
+Front End:
+
+React
+React Router DOM
+Bootstrap for UI components
+
+
+Back End:
+
+Node.js
+MongoDB with Mongoose
+
+Backend Requirements
+
+Project Structure:
+
+
+Create folders named models, controllers, and routers inside the nodeapp folder as mentioned below:
+
+
+index.js:
+
+Express Setup: Sets up an Express server with CORS middleware.
+Middleware: Adds middleware for parsing JSON request bodies and enabling CORS for all origins.
+MongoDB Connection: Connects to the MongoDB database using mongoose.connect("mongodb://localhost:27017/taskdb").
+Routing: Defines routes for handling task management requests.
+Server Start: Starts the server on port 8080 if the database connection is successful.
+
+
+Routers (taskRouter.js):
+Define the routes for task management in taskRouter.js:
+
+POST /tasks - Create a new task.
+GET /tasks - Retrieve all tasks.
+
+
+Models (taskModel.js):
+Task Schema Model:
+
+
+
+Fields:
+
+name:
+Type: String
+Constraints: Required: true
+Description: Represents the name of the task.
+description:
+Type: String
+Constraints: Required: true
+Description: Represents the description/details of the task.
+timestamps:
+Type: Boolean
+Constraints: Default: true
+Description: Automatically adds createdAt and updatedAt fields.
+
+
+taskController.js:
+
+Functions to handle various task-related operations:
+
+createTask(req, res):
+Creates a new task in the database with the name and description from req.body using Task.create().
+Responds with status code 201 and the created task if successful.
+Responds with status code 500 and an error message if an error occurs.
+getTasks(req, res):
+Retrieves all tasks from the database using Task.find().
+Responds with status code 200 and sends tasks in JSON format if successful.
+Responds with status code 500 and an error message if an error occurs.
+
+Frontend Requirements
+
+Project Folder Structure:
+
+
+
+Components:
+Home Component:
+Purpose: The landing page with navigation options.
+Features:
+Displays the title "Task Manager".
+Includes two main action buttons: Add Task and View Tasks.
+Navigation through React Router Link components.
+AddTask Component:
+Purpose: A form for adding new tasks.
+Features:
+Includes input fields for task name and description
+Uses HTML5 required attributes for form validation.
+Displays success or error messages after form submission.
+Auto-redirects to View Tasks page after a task is successfully added.
+A Back to Home button for returning to the home page.
+ViewTasks Component:
+Purpose: Displays all tasks in a table format.
+Features:
+Fetches and displays tasks from the database.
+Shows task name and description.
+A Back to Home button.
+Uses useEffect to fetch tasks in real-time.
+
+
+Validations:
+
+Client-Side Validation:
+Implement HTML5 required attributes for form fields.
+Provide immediate feedback for empty fields.
+Display success or error messages after form submission.
+Server-Side Validation:
+Validate required fields in controllers.
+Return appropriate error messages for validation failures.
+Handle database constraints and errors.
+
+Exception Handling:
+
+Implement try-catch blocks in all controller functions.
+Log errors for debugging while showing user-friendly messages.
+Handle MongoDB connection errors and API failures
+Handle 404 and 500 errors gracefully.
+
+Error Pages:
+
+Custom error handling for API failures.
+Display user-friendly error messages for network issues.
+Graceful handling of 404 and 500 error
+
+
+Test cases- frontend_home_component_renders_task_manager_heading	React Jest	NA	Compilation Error
+frontend_home_component_has_add_task_button	React Jest	NA	Compilation Error
+frontend_home_component_has_view_tasks_button	React Jest	NA	Compilation Error
+frontend_home_component_add_task_button_navigates_to_add_task_page	React Jest	NA	Compilation Error
+frontend_home_component_view_tasks_button_navigates_to_view_tasks_page	React Jest	NA	Compilation Error
+frontend_addtask_component_renders_add_new_task_heading	React Jest	NA	Compilation Error
+frontend_addtask_component_has_task_name_input	React Jest	NA	Compilation Error
+frontend_addtask_component_has_task_description_input	React Jest	NA	Compilation Error
+frontend_addtask_component_has_add_task_submit_button	React Jest	NA	Compilation Error
+frontend_addtask_component_has_back_to_home_link	React Jest	NA	Compilation Error
+frontend_addtask_form_can_be_submitted	React Jest	NA	Compilation Error
+frontend_addtask_shows_error_for_empty_fields	React Jest	NA	Compilation Error
+frontend_addtask_back_to_home_link_navigates_to_home	React Jest	NA	Compilation Error
+frontend_viewtasks_component_renders_all_tasks_heading	React Jest	NA	Compilation Error
+frontend_viewtasks_component_has_back_to_home_link	React Jest	NA	Compilation Error
+frontend_viewtasks_component_has_refresh_button	React Jest	NA	Compilation Error
+frontend_viewtasks_shows_loading_state	React Jest	NA	Compilation Error
+frontend_viewtasks_shows_empty_message	React Jest	NA	Compilation Error
+frontend_viewtasks_shows_tasks_list	React Jest	NA	Compilation Error
+frontend_viewtasks_back_to_home_link_navigates_to_home_from_viewtasks	React Jest	NA	Compilation Error
+backend_taskmodel_should_validate_task_with_all_required_fields	Node Jest	NA	Compilation Error
+backend_taskmodel_should_validate_task_with_missing_name	Node Jest	NA	Compilation Error
+backend_taskmodel_should_validate_task_with_missing_description	Node Jest	NA	Compilation Error
+backend_taskmodel_should_validate_task_with_missing_both_name_and_description	Node Jest	NA	Compilation Error
+backend_taskmodel_should_validate_task_with_empty_strings	Node Jest	NA	Compilation Error
+backend_createTask_in_taskcontroller_should_return_201_status_code_when_task_created_successfully	Node Jest	NA	Compilation Error
+backend_createTask_in_taskcontroller_should_return_500_status_code_when_internal_server_error_occurs	Node Jest	NA	Compilation Error
+backend_createTask_in_taskcontroller_should_handle_missing_required_fields	Node Jest	NA	Compilation Error
+backend_getTasks_in_taskcontroller_should_return_200_status_code_when_tasks_found	Node Jest	NA	Compilation Error
+backend_getTasks_in_taskcontroller_should_return_empty_array_when_no_tasks_exist	Node Jest	NA	Compilation Error
+backend_getTasks_in_taskcontroller_should_return_500_status_code_when_internal_server_error_occurs	Node Jest	NA	Compilation Error
+backend_task_should_have_createdAt_and_updatedAt_fields	Node Jest	NA	Compilation Error
+ Here is the test code gimme perfect code- import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import '@testing-library/jest-dom/extend-expect';
+import axios from 'axios';
+import AddTask from '../Components/Addtask';
+import Home from '../Components/Home';
+import ViewTasks from '../Components/Viewtask';
+
+// Proper axios mock
+jest.mock('axios');
+const mockedAxios = axios;
+
+// Mock axios methods
+mockedAxios.post = jest.fn();
+mockedAxios.get = jest.fn();
+
+// Simple QueryClient
+const createTestQueryClient = () => new QueryClient({
+  defaultOptions: {
+    queries: { retry: false },
+    mutations: { retry: false },
+  },
+});
+
+// Helper to render components
+const renderWithProviders = (component) => {
+  const queryClient = createTestQueryClient();
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        {component}
+      </Router>
+    </QueryClientProvider>
+  );
+};
+
+describe('Home Component - Basic Rendering', () => {
+  test('frontend_home_component_renders_task_manager_heading', () => {
+    renderWithProviders(<Home />);
+    expect(screen.getByText('Task Manager')).toBeInTheDocument();
+  });
+
+  test('frontend_home_component_has_add_task_button', () => {
+    renderWithProviders(<Home />);
+    expect(screen.getByText('Add Task')).toBeInTheDocument();
+  });
+
+  test('frontend_home_component_has_view_tasks_button', () => {
+    renderWithProviders(<Home />);
+    expect(screen.getByText('View Tasks')).toBeInTheDocument();
+  });
+
+  test('frontend_home_component_add_task_button_navigates_to_add_task_page', () => {
+    renderWithProviders(<Home />);
+    fireEvent.click(screen.getByText('Add Task'));
+    expect(window.location.pathname).toBe('/add-task');
+  });
+
+  test('frontend_home_component_view_tasks_button_navigates_to_view_tasks_page', () => {
+    renderWithProviders(<Home />);
+    fireEvent.click(screen.getByText('View Tasks'));
+    expect(window.location.pathname).toBe('/view-tasks');
+  });
+});
+
+describe('AddTask Component - Basic Rendering', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('frontend_addtask_component_renders_add_new_task_heading', () => {
+    renderWithProviders(<AddTask />);
+    expect(screen.getByText('Add New Task')).toBeInTheDocument();
+  });
+
+  test('frontend_addtask_component_has_task_name_input', () => {
+    renderWithProviders(<AddTask />);
+    expect(screen.getByLabelText(/Task Name/)).toBeInTheDocument();
+  });
+
+  test('frontend_addtask_component_has_task_description_input', () => {
+    renderWithProviders(<AddTask />);
+    expect(screen.getByLabelText(/Task Description/)).toBeInTheDocument();
+  });
+
+  test('frontend_addtask_component_has_add_task_submit_button', () => {
+    renderWithProviders(<AddTask />);
+    expect(screen.getByRole('button', { name: /Add Task/ })).toBeInTheDocument();
+  });
+
+  test('frontend_addtask_component_has_back_to_home_link', () => {
+    renderWithProviders(<AddTask />);
+    expect(screen.getByText('Back to Home')).toBeInTheDocument();
+  });
+
+  test('frontend_addtask_form_can_be_submitted', async () => {
+    // Mock successful response
+    mockedAxios.post.mockResolvedValueOnce({ 
+      data: { message: 'Success' } 
+    });
+    
+    renderWithProviders(<AddTask />);
+    
+    // Fill form
+    fireEvent.change(screen.getByLabelText(/Task Name/), { 
+      target: { value: 'Test Task' } 
+    });
+    fireEvent.change(screen.getByLabelText(/Task Description/), { 
+      target: { value: 'Test Description' } 
+    });
+    
+    // Submit form
+    fireEvent.click(screen.getByRole('button', { name: /Add Task/ }));
+    
+    // Check if axios was called
+    await waitFor(() => {
+      expect(mockedAxios.post).toHaveBeenCalled();
+    });
+  });
+
+  test('frontend_addtask_shows_error_for_empty_fields', () => {
+    renderWithProviders(<AddTask />);
+    
+    // Try to submit without filling fields
+    fireEvent.click(screen.getByRole('button', { name: /Add Task/ }));
+    
+    // Should show error message
+    expect(screen.getByText(/Please fill in all fields/i)).toBeInTheDocument();
+  });
+
+  test('frontend_addtask_back_to_home_link_navigates_to_home', () => {
+    renderWithProviders(<AddTask />);
+    fireEvent.click(screen.getByText('Back to Home'));
+    expect(window.location.pathname).toBe('/');
+  });
+});
+
+describe('ViewTasks Component - Basic Rendering', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('frontend_viewtasks_component_renders_all_tasks_heading', () => {
+    renderWithProviders(<ViewTasks />);
+    expect(screen.getByText('All Tasks')).toBeInTheDocument();
+  });
+
+  test('frontend_viewtasks_component_has_back_to_home_link', () => {
+    renderWithProviders(<ViewTasks />);
+    expect(screen.getByText('Back to Home')).toBeInTheDocument();
+  });
+
+  test('frontend_viewtasks_component_has_refresh_button', () => {
+    renderWithProviders(<ViewTasks />);
+    expect(screen.getByRole('button', { name: /Refresh/ })).toBeInTheDocument();
+  });
+
+  test('frontend_viewtasks_shows_loading_state', () => {
+    // Mock loading state by not resolving the promise
+    mockedAxios.get.mockReturnValueOnce(new Promise(() => {}));
+    
+    renderWithProviders(<ViewTasks />);
+    
+    // Should show loading message
+    expect(screen.getByText(/Loading tasks/i)).toBeInTheDocument();
+  });
+
+  test('frontend_viewtasks_shows_empty_message', async () => {
+    // Mock empty response
+    mockedAxios.get.mockResolvedValueOnce({
+      data: { tasks: [], count: 0 }
+    });
+
+    renderWithProviders(<ViewTasks />);
+    
+    // Wait for empty state
+    await waitFor(() => {
+      expect(screen.getByText(/No tasks found/i)).toBeInTheDocument();
+    });
+  });
+
+  test('frontend_viewtasks_shows_tasks_list', async () => {
+    // Mock successful API response
+    mockedAxios.get.mockResolvedValueOnce({
+      data: {
+        tasks: [
+          { 
+            _id: '1', 
+            name: 'Test Task 1', 
+            description: 'Test Description 1', 
+            createdAt: new Date(), 
+            updatedAt: new Date() 
+          }
+        ],
+        count: 1
+      }
+    });
+
+    renderWithProviders(<ViewTasks />);
+    
+    // Wait for tasks to appear
+    await waitFor(() => {
+      expect(screen.getByText('Test Task 1')).toBeInTheDocument();
+    });
+  });
+
+  test('frontend_viewtasks_back_to_home_link_navigates_to_home_from_viewtasks', () => {
+    renderWithProviders(<ViewTasks />);
+    fireEvent.click(screen.getByText('Back to Home'));
+    expect(window.location.pathname).toBe('/');
+  });
+});
